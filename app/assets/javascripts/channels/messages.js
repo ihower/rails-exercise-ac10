@@ -9,5 +9,8 @@ App.messages = App.cable.subscriptions.create("MessagesChannel", {
     console.log("received!")
     $("#message_content").val("")
     $("#message-list").prepend(data.html)
+  },
+  speak: function(content) {
+    this.perform("speak", { message: { content: content } } );
   }
 });

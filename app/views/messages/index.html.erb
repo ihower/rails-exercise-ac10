@@ -5,8 +5,19 @@
   <%= f.submit :submit %>
 <% end %>
 
+<input type="text" id="content-input">
+
 <ul id="message-list">
 <% @messages.each do |m| %>
   <%= render :partial => "message", :locals => { :message => m } %>
 <% end %>
 </ul>
+
+<script>
+  $("#content-input").on("keypress", function(event){
+    if (event.keyCode == 13 ) {
+        //alert( event.target.value )
+        App.messages.speak( event.target.value );
+    }
+  })
+</script>

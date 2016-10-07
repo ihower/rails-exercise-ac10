@@ -9,4 +9,14 @@ class MessagesChannel < ApplicationCable::Channel
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
+
+  def speak(data)    
+    content = data["content"]
+
+    @message = Message.new( :content => content )
+    @message.save
+
+    html = ApplicationController.renderer.render( :partial => "messages/message", :locals => { :message => @message } )
+    ActionCable.server.broadcast "public_channel", { :html => html }
+  end
 end
