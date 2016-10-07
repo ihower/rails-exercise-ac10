@@ -20,6 +20,19 @@ var app = new Vue({
     todos: <%= @todos.to_json.html_safe %>,
     new_todo_title: ""
   },
+  mounted: function(){
+    var that = this;
+    App.todos = App.cable.subscriptions.create("TodosChannel", {
+      connected: function() {
+        console.log("connected todos");
+      },
+      disconnected: function() {},
+      received: function(todos) {
+        that.todos = todos;
+      }
+    });
+
+  },
   methods: {
     add: function(){
       console.log("abc")
