@@ -1,0 +1,12 @@
+<h2>Messages</h2>
+
+<%= form_for Message.new, :remote => true do |f| %>
+  <%= f.text_field :content %>
+  <%= f.submit :submit %>
+<% end %>
+
+<ul id="message-list">
+<% @messages.each do |m| %>
+  <%= render :partial => "message", :locals => { :message => m } %>
+<% end %>
+</ul>

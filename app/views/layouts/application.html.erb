@@ -11,5 +11,10 @@
   <body>
     <h1>AC 10 exercise</h1>
     <%= yield %>
+
+    <footer>
+      <%= link_to "todos", todos_path %> |
+      <%= link_to "chat", messages_path %>
+    </footer>
   </body>
 </html>
